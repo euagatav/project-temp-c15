@@ -1,7 +1,11 @@
 
 //Declare a variável para PLAY e END
+var PLAY = 1;
+var END = 0;
+var gameState = PLAY;
 //inicialize o valor para a variável
 //Atribua o valor de gameState como PLAY
+
 
 var bow , arrow,  background, redB, pinkB, greenB ,blueB ,arrowGroup;
 var bowImage, arrowImage, green_balloonImage, red_balloonImage, pink_balloonImage ,blue_balloonImage, backgroundImage;
@@ -46,6 +50,7 @@ function setup() {
 function draw() {
  background(0);
 //Adicione a condição para gameState = PLAY
+gameState= PLAY
   // solo em movimento
     scene.velocityX = -3 
 
@@ -79,26 +84,25 @@ function draw() {
     }
   }
 
-  if (arrowGroup.isTouching(redB)) {
-    redB.destroyEach();
-
-    gameState=END; 
-
-
-}
- //escreva uma condição para o estado END
- //Adicione o código para destruir o arco
- //defina a velocidade do fundo como 0
- 
-
-
-
-
-
- 
   
-  drawSprites();
+ //escreva uma condição para o estado END
+
+ if (arrowGroup.isTouching(redB)) {
+  redB.destroyEach();
+
+  gameState=END; 
+ }
+ //Adicione o código para destruir o arco
+ if (gameState === END) {
+  bow.destroy();
+  //defina a velocidade do fundo como 0
+  scene.velocityX = 0;
+}
+ 
+ 
+  drawSprites();{
 //Adicione a condição de texto para exibir a pontuação.
+text("Pontuação:"+ score, 300,50);
 }
 
 
@@ -147,4 +151,4 @@ function pinkBalloon() {
   arrow.scale = 0.3;
   arrowGroup.add(arrow);
 
-}
+ }
